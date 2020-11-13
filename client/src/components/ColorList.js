@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {useHistory, useParams} from 'react-router-dom'
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import {useHistory} from 'react-router-dom'
 
 const initialColor = {
   color: "",
@@ -8,8 +8,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-
-  const history = useHistory()
 
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -41,8 +39,9 @@ const ColorList = ({ colors, updateColors }) => {
     // make a delete request to delete this color'
     axiosWithAuth()
     .delete(`/api/colors/${color.id}`)
-    .then(() => console.log(colors))
-
+    .then(() => {
+      console.log(`${color.color}sucessfully deleted`)
+    })
   };
 
   return (
